@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Crear Nueva Tarea</h2>
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.titulo.label_tag }}
+            {{ form.titulo }}
+        </div>
+        <div class="mb-3">
+            {{ form.descripcion.label_tag }}
+            {{ form.descripcion }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form.completada }}
+            {{ form.completada.label_tag }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Tarea</button>
+        <a href="{% url 'tarea_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %} 

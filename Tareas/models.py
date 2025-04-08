@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=100, verbose_name=_("Nombre"))
@@ -33,12 +34,7 @@ class Tarea(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name=_("Fecha de Creación"))
     fecha_vencimiento = models.DateTimeField(null=True, blank=True, verbose_name=_("Fecha de Vencimiento"))
     completada = models.BooleanField(default=False, verbose_name=_("Completada"))
-    usuario = models.ForeignKey(
-        Usuario,
-        on_delete=models.CASCADE,
-        related_name='tareas',
-        verbose_name=_("Usuario")
-    )
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tareas')
 
     class Meta:
         verbose_name = _("Tarea")

@@ -63,7 +63,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-La aplicación estará disponible en http://127.0.0.1:8000/tareas/
+La aplicación estará disponible en http://127.0.0.1:8000
 
 ## Estructura del Proyecto
 

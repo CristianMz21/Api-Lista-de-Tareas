@@ -1,6 +1,7 @@
 # Lista de Tareas - Aplicación Django
 
 Una aplicación web de gestión de tareas construida con Django que permite a los usuarios crear, editar, eliminar y marcar tareas como completadas.
+![image](https://github.com/user-attachments/assets/08f9b8af-8f55-4253-8a2c-650d5512e7e9)
 
 ## Características
 

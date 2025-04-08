@@ -27,7 +27,7 @@ Una aplicación web de gestión de tareas construida con Django que permite a lo
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/Api-Lista-de-Tareas.git
+git clone https://github.com/CristianMz21/Api-Lista-de-Tareas.git
 cd Api-Lista-de-Tareas
 ```
 

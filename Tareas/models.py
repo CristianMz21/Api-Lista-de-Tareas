@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=100, verbose_name=_("Nombre"))
@@ -43,3 +44,8 @@ class Tarea(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def clean(self):
+        super().clean()
+        if self.prioridad not in dict(self.Prioridad.choices):
+            raise ValidationError({'prioridad': _('Prioridad inválida')})

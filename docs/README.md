@@ -1,9 +1,18 @@
-# API de Lista de Tareas
+# Documentación de la API de Lista de Tareas
 
-Esta es una API RESTful para gestionar una lista de tareas, desarrollada con Django y desplegada en Vercel.
+## Índice
+1. [Introducción](#introducción)
+2. [Configuración del Proyecto](#configuración-del-proyecto)
+3. [Estructura del Proyecto](#estructura-del-proyecto)
+4. [Modelos](#modelos)
+5. [API Endpoints](#api-endpoints)
+6. [Pruebas](#pruebas)
+7. [Despliegue](#despliegue)
+8. [Contribución](#contribución)
 
-## Características
+## Introducción
 
+Esta API permite gestionar una lista de tareas con las siguientes características:
 - Autenticación de usuarios
 - CRUD completo de tareas
 - Priorización de tareas (Alta, Media, Baja)
@@ -11,14 +20,15 @@ Esta es una API RESTful para gestionar una lista de tareas, desarrollada con Dja
 - Interfaz de usuario responsiva
 - API RESTful
 
-## Requisitos
+## Configuración del Proyecto
 
+### Requisitos
 - Python 3.8+
 - Django 4.0+
 - PostgreSQL (para producción)
 - SQLite (para desarrollo)
 
-## Instalación
+### Instalación
 
 1. Clonar el repositorio:
 ```bash
@@ -76,6 +86,7 @@ api-tareas/
 │   ├── tests.py          # Pruebas
 │   ├── urls.py           # URLs
 │   └── views.py          # Vistas
+├── docs/                  # Documentación
 ├── requirements.txt       # Dependencias
 └── manage.py             # Script de gestión de Django
 ```
@@ -97,7 +108,7 @@ api-tareas/
 - `completada`: Estado de completitud
 - `usuario`: Usuario propietario
 
-## Endpoints de la API
+## API Endpoints
 
 ### Autenticación
 - `POST /login/`: Iniciar sesión
@@ -112,9 +123,9 @@ api-tareas/
 - `DELETE /tareas/<id>/`: Eliminar tarea
 - `POST /tareas/<id>/toggle/`: Cambiar estado de completitud
 
-## Ejemplos de Uso
+### Ejemplos de Uso
 
-### Crear una nueva tarea
+#### Crear una nueva tarea
 ```python
 import requests
 
@@ -134,7 +145,7 @@ response = requests.post(url, headers=headers, json=data)
 print(response.json())
 ```
 
-### Marcar tarea como completada
+#### Marcar tarea como completada
 ```python
 import requests
 
@@ -153,25 +164,79 @@ print(response.json())
 
 ## Pruebas
 
-Para ejecutar las pruebas:
+### Configuración de Pruebas
+
+El proyecto incluye una configuración específica para pruebas en `ListaDeTareas/test_settings.py` que:
+- Usa SQLite como base de datos para pruebas
+- Deshabilita el hashing de contraseñas para pruebas más rápidas
+- Deshabilita las migraciones durante las pruebas
+- Configura un backend de correo en memoria
+- Deshabilita el caché
+- Configura archivos estáticos para pruebas
+
+### Ejecución de Pruebas
+
+Para ejecutar las pruebas, puedes usar:
+
+1. El script personalizado:
 ```bash
-python manage.py test Tareas
+python run_tests.py
 ```
+
+2. O directamente con manage.py:
+```bash
+python manage.py test Tareas --settings=ListaDeTareas.test_settings
+```
+
+### Cobertura de Pruebas
 
 Las pruebas cubren:
 - Creación y validación de modelos
 - Vistas y autenticación
 - Operaciones CRUD
 - Cambio de estado de tareas
+- Manejo de errores
+- Validación de datos
 
 ## Despliegue
 
-El proyecto está configurado para desplegarse en Vercel. Para desplegar:
+### Despliegue en Vercel
 
 1. Crear una cuenta en Vercel
 2. Conectar con tu repositorio de GitHub
-3. Configurar las variables de entorno en Vercel
+3. Configurar las variables de entorno en Vercel:
+   - `DEBUG`: False
+   - `SECRET_KEY`: Tu clave secreta
+   - `DATABASE_URL`: URL de tu base de datos PostgreSQL
 4. Desplegar
+
+### Despliegue Local
+
+1. Configurar PostgreSQL:
+```bash
+createdb api_tareas
+```
+
+2. Actualizar variables de entorno:
+```
+DEBUG=False
+DATABASE_URL=postgres://usuario:contraseña@localhost:5432/api_tareas
+```
+
+3. Ejecutar migraciones:
+```bash
+python manage.py migrate
+```
+
+4. Recolectar archivos estáticos:
+```bash
+python manage.py collectstatic
+```
+
+5. Iniciar el servidor:
+```bash
+gunicorn ListaDeTareas.wsgi:application
+```
 
 ## Contribución
 
@@ -181,6 +246,13 @@ El proyecto está configurado para desplegarse en Vercel. Para desplegar:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir un Pull Request
 
+### Guía de Estilo
+
+- Seguir PEP 8 para Python
+- Usar docstrings para documentar funciones y clases
+- Escribir pruebas para nuevas funcionalidades
+- Actualizar la documentación cuando sea necesario
+
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles. 

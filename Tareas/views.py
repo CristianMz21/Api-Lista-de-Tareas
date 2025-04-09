@@ -108,7 +108,10 @@ def toggle_completada(request, pk):
         data = json.loads(request.body)
         completada = data.get('completada', False)
     except json.JSONDecodeError:
-        completada = not tarea.completada  # Si hay error, simplemente invertir el estado actual
+        return JsonResponse({
+            'success': False,
+            'error': 'JSON inválido'
+        }, status=400)
     
     # Actualizar el estado de completado
     tarea.completada = completada

@@ -2,14 +2,26 @@
     "version": 2,
     "builds": [
         {
-            "src": "ListaDeTareas/wsgi.py",
-            "use": "@vercel/python"
+            "src": "vercel_app.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
         }
     ],
     "routes": [
         {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
             "src": "/(.*)",
-            "dest": "ListaDeTareas/wsgi.py"
+            "dest": "vercel_app.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "DJANGO_SETTINGS_MODULE": "ListaDeTareas.settings"
+    }
 } 

@@ -1,7 +1,87 @@
-# Lista de Tareas - Aplicación Django
+# Lista de Tareas - Django Application
 
-Una aplicación web de gestión de tareas construida con Django que permite a los usuarios crear, editar, eliminar y marcar tareas como completadas.
-![image](https://github.com/user-attachments/assets/08f9b8af-8f55-4253-8a2c-650d5512e7e9)
+A task management application built with Django.
+
+## Deployment Options
+
+### 1. Deploying with Docker
+
+1. Build the Docker image:
+```bash
+docker build -t lista-tareas .
+```
+
+2. Run the container:
+```bash
+docker-compose up
+```
+
+The application will be available at `http://localhost:8000`
+
+### 2. Deploying to Vercel
+
+1. Install Vercel CLI:
+```bash
+npm install -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+### 3. Manual Deployment
+
+1. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+2. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+3. Run migrations:
+```bash
+python manage.py migrate
+```
+
+4. Collect static files:
+```bash
+python manage.py collectstatic
+```
+
+5. Run the application:
+```bash
+gunicorn ListaDeTareas.wsgi:application
+```
+
+## Environment Variables
+
+Required environment variables:
+- `SECRET_KEY`: Django secret key
+- `DEBUG`: Set to False in production
+- `DATABASE_URL`: PostgreSQL database URL
+- `ALLOWED_HOSTS`: Comma-separated list of allowed hosts
+
+## Features
+
+- Task management
+- User authentication
+- Responsive design
+- PostgreSQL database support
+
+## Requirements
+
+- Python 3.8+
+- PostgreSQL
+- See requirements.txt for Python dependencies
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Características
 
@@ -17,12 +97,6 @@ Una aplicación web de gestión de tareas construida con Django que permite a lo
 - Mensajes de retroalimentación para las acciones del usuario
 - Protección de rutas para usuarios no autenticados
 - Cada usuario solo puede ver y gestionar sus propias tareas
-
-## Requisitos
-
-- Python 3.8 o superior
-- pip (gestor de paquetes de Python)
-- Virtualenv (recomendado)
 
 ## Instalación
 
@@ -130,7 +204,3 @@ Cada tarea incluye:
 3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles. 

@@ -22,7 +22,7 @@ Esta es una API RESTful para gestionar una lista de tareas, desarrollada con Dja
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/api-tareas.git
+git clone https://github.com/CristianMz21/Api-Lista-de-Tareas.git
 cd api-tareas
 ```
 
